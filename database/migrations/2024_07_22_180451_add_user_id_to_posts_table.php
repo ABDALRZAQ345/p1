@@ -12,16 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger("user_id")->nullable();
-$table->foreign("user_id")->references('id')->on('users');
-/// mean that user_id must be from id column in user table
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
 
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    public function down(): void
+    {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+            $table->dropForeign('user_id');
+            $table->dropColumn('user_id');
 
+        });
+    }
 };

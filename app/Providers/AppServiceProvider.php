@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Providers;
+
 use App\Models\Post;
 use App\Models\User;
-
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,10 +22,10 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot() :void
+    public function boot(): void
     {
 
-        Gate::define('edit-post',function (User $user,Post $post){
+        Gate::define('edit-post', function (User $user, Post $post) {
             return $post->user->is($user);
         });
 
