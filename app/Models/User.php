@@ -4,11 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Illuminate\Cache\Events\ForgettingKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable
 {
@@ -19,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-   protected $guarded=[];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,11 +41,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function posts(){
 
-        return $this->hasMany(Post::class,'user_id');
+    public function posts()
+    {
+
+        return $this->hasMany(Post::class, 'user_id');
     }
-    public function companies(){
-        return $this->belongsToMany(Company::class,foreignPivotKey:'user_id');
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, foreignPivotKey: 'user_id');
     }
 }
